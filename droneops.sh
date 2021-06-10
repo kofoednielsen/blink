@@ -9,17 +9,15 @@ Server: NetCat
 Transfer-Encoding: chunked
 Vary: Accept-Encoding
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
 <title>Thank you for this request</title>
 </head>
 <body>
 We're happy to be able to serve your needs.
 </body>
-</html>
-" | nc -lN 1234 > /dev/null
+</html>" | nc -lN 1234 > /dev/null
   echo "Running pipeline"
   echo "Pulling newest version.."
   git pull origin main

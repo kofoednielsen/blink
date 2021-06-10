@@ -3,7 +3,7 @@ void setup() {
  }
  void loop() {
    digitalWrite(LED_BUILTIN, HIGH);
-   delay(4000);
+   delay(100);
    digitalWrite(LED_BUILTIN, LOW);
-   delay(1000);
+   delay(100);
 }

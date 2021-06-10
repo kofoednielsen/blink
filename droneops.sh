@@ -2,7 +2,6 @@ while true then
   do
   echo "HTTP/1.1 200 OK
 Connection: keep-alive
-Content-Encoding: gzip
 Content-Type: text/html; charset=utf-8
 Date: Thu, 10 Jun 2021 21:52:01 GMT
 Server: NetCat 

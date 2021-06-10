@@ -1,6 +1,25 @@
 while true then 
   do
-  echo "HTTP/1.1 200 OK" | nc -lN 1234 > /dev/null
+  echo "HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Encoding: gzip
+Content-Type: text/html; charset=utf-8
+Date: Thu, 10 Jun 2021 21:52:01 GMT
+Server: NetCat 
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Thank you for this request</title>
+</head>
+<body>
+We're happy to be able to serve your needs.
+</body>
+</html>
+" | nc -lN 1234 > /dev/null
   echo "Running pipeline"
   echo "Pulling newest version.."
   git pull origin main

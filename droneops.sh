@@ -1,6 +1,6 @@
 while true then 
   do
-  echo "HTTP/1.1 200 OK" | nc -lN 1234 | /dev/null
+  echo "HTTP/1.1 200 OK" | nc -lN 1234 > /dev/null
   echo "Running pipeline"
   echo "Pulling newest version.."
   git pull origin main

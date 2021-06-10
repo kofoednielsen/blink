@@ -1,11 +1,11 @@
 void setup() {
    pinMode(LED_BUILTIN, OUTPUT);
    Serial.begin(9600);
-   Serial.println('Running!');  
+   Serial.println("Running!");  
  }
  void loop() {
    if (Serial.available() > 0) {
-     Serial.println('I am still running..!');  
+     Serial.println("I am still running..!");  
    }
    digitalWrite(LED_BUILTIN, HIGH);
    delay(100);

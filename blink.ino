@@ -4,7 +4,9 @@ void setup() {
    Serial.println('Running!');  
  }
  void loop() {
-   Serial.println('I am still running..!');  
+   if (Serial.available() > 0) {
+     Serial.println('I am still running..!');  
+   }
    digitalWrite(LED_BUILTIN, HIGH);
    delay(100);
    digitalWrite(LED_BUILTIN, LOW);

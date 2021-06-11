@@ -7,5 +7,5 @@ void setup() {
    digitalWrite(LED_BUILTIN, HIGH);
    delay(1000);
    digitalWrite(LED_BUILTIN, LOW);
-   delay(10000);
+   delay(1000);
 }

@@ -1,15 +1,12 @@
+int MY_PIN = 8;
+
 void setup() {
    pinMode(LED_BUILTIN, OUTPUT);
+   pinMode(MY_PIN, INPUT);
    Serial.begin(9600);
    Serial.println("Running!");  
  }
  void loop() {
-   digitalWrite(LED_BUILTIN, HIGH);
-   delay(100);
-   digitalWrite(LED_BUILTIN, LOW);
-   delay(100);
-   digitalWrite(LED_BUILTIN, HIGH);
-   delay(100);
-   digitalWrite(LED_BUILTIN, LOW);
-   delay(1000);
+   boolean my_pin_state = digitalRead(MY_PIN)
+   digitalWrite(LED_BUILTIN, my_pin_state);
 }

@@ -7,6 +7,6 @@ void setup() {
    Serial.println("Running!");  
  }
  void loop() {
-   boolean my_pin_state = digitalRead(MY_PIN)
+   boolean my_pin_state = digitalRead(MY_PIN);
    digitalWrite(LED_BUILTIN, my_pin_state);
 }

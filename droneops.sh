@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export HOME=/root
+cd /root/arduino/blink
+
 export RED=18
 export GREEN=23
 export BLUE=24
@@ -19,33 +22,49 @@ echo "1" > /sys/class/gpio/gpio$RED/value
 echo "1" > /sys/class/gpio/gpio$GREEN/value
 echo "1" > /sys/class/gpio/gpio$BLUE/value
 
-set_status_color() {
-	echo "1" > /sys/class/gpio/gpio$RED/value
-	echo "1" > /sys/class/gpio/gpio$GREEN/value
-	echo "1" > /sys/class/gpio/gpio$BLUE/value
-
-	if [$1]
-	then
-		echo "0" > /sys/class/gpio/gpio$1/value
-	fi
+set_status_color() { 
+  echo "1" > /sys/class/gpio/gpio$RED/value
+  echo "1" > /sys/class/gpio/gpio$GREEN/value
+  echo "1" > /sys/class/gpio/gpio$BLUE/value
+ 
+  if [ "$1" != "" ]
+  then
+    echo "0" > /sys/class/gpio/gpio$1/value
+  fi
 }
 
-
-export HOME=/root
-cd /root/arduino/blink
-while true then 
-  do
+loop() {
   set_status_color $BLUE
   echo "Running pipeline"
   echo "Pulling newest version.."
   git pull origin main
+  if [ "$?" != "0" ]
+  then
+    set_status_color $RED
+    return
+  fi
   echo "Compiling.."
   arduino-cli compile --fqbn arduino:avr:uno blink
-  arduino-cli compile --fqbn arduino:avr:uno blink
+  if [ "$?" != "0" ]
+  then
+    set_status_color $RED
+    return
+  fi
   echo "Uploading.."
   arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno blink
+  if [ "$?" != "0" ]
+  then
+    set_status_color $RED
+    return
+  fi
   echo "Done."
   set_status_color $GREEN
+}
+
+loop
+
+while true then 
+  do
   echo "HTTP/1.1 200 OK
 Connection: keep-alive
 Content-Type: text/html; charset=utf-8
@@ -61,4 +80,5 @@ Server: NetCat
 We're happy to be able to serve your needs.
 </body>
 </html>" | nc -lN 1234 > /dev/null
+  loop
 done

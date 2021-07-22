@@ -62,6 +62,8 @@ loop() {
   fi
   echo "Done."
   set_status_color $GREEN
+
+  nc 192.168.1.77 1337 < /dev/ttyACM0
 }
 
 loop

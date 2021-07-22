@@ -1,12 +1,11 @@
 #!/bin/bash
-
-export HOME=/root
+HOME=/root
 cd /root/project/blink
 
-export RED=18
-export GREEN=23
-export BLUE=24
-export TEENSY_RESET=4
+RED=18
+GREEN=23
+BLUE=24
+TEENSY_RESET=4
 # export status led pints to userspace
 echo $RED > /sys/class/gpio/export  
 echo $GREEN > /sys/class/gpio/export  
@@ -63,11 +62,11 @@ loop() {
   echo "Done."
   set_status_color $GREEN
 
-  export SERIAL=`ls /dev/ttyACM*`
+  SERIAL=`ls /dev/ttyACM*`
   while [ "$SERIAL" == "" ]
   do
     sleep 0.5
-    export SERIAL=`ls /dev/ttyACM*`
+    SERIAL=`ls /dev/ttyACM*`
   done
   echo "Found serial on $SERIAL"
   nc 192.168.1.77 1337 < $SERIAL &

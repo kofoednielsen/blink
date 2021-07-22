@@ -63,8 +63,14 @@ loop() {
   echo "Done."
   set_status_color $GREEN
 
-  sleep 4
-  nc 192.168.1.77 1337 < /dev/ttyACM0 &
+  export SERIAL=`ls /dev/ttyACM*`
+  while [ "$SERIAL" == "" ]
+  do
+    sleep 0.5
+    export SERIAL=`ls /dev/ttyACM*`
+  done
+  echo "Found serial on $SERIAL"
+  nc 192.168.1.77 1337 < $SERIAL &
 }
 
 loop

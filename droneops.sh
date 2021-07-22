@@ -63,7 +63,7 @@ loop() {
   echo "Done."
   set_status_color $GREEN
 
-  sleep 1
+  sleep 2
   nc 192.168.1.77 1337 < /dev/ttyACM0 &
 }
 

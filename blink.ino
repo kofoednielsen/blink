@@ -1,7 +1,8 @@
 void setup() {
-   pinMode(LED_BUILTIN, OUTPUT);
  }
 void loop() {
    // skrtttt
-   digitalWrite(LED_BUILTIN, LOW);
+   Serial.print("Hello World!");
+   Serial.println();
+   delay(1000)
 }

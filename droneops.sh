@@ -1,26 +1,29 @@
 #!/bin/bash
 
 export HOME=/root
-cd /root/arduino/blink
+cd /root/project/blink
 
 export RED=18
 export GREEN=23
 export BLUE=24
-
+export TEENSY_RESET=4
 # export status led pints to userspace
 echo $RED > /sys/class/gpio/export  
 echo $GREEN > /sys/class/gpio/export  
 echo $BLUE > /sys/class/gpio/export  
+echo $TEENSY_RESET > /sys/class/gpio/export
 
 # Sets status led pins as an output
 echo "out" > /sys/class/gpio/gpio$RED/direction
 echo "out" > /sys/class/gpio/gpio$GREEN/direction
 echo "out" > /sys/class/gpio/gpio$BLUE/direction
+echo "out" > /sys/class/gpio/gpio$TEENSY_RESET/direction
 
 # turn all off
 echo "1" > /sys/class/gpio/gpio$RED/value
 echo "1" > /sys/class/gpio/gpio$GREEN/value
 echo "1" > /sys/class/gpio/gpio$BLUE/value
+echo "1" > /sys/class/gpio/gpio$TEENSY_RESET/value
 
 set_status_color() { 
   echo "1" > /sys/class/gpio/gpio$RED/value
@@ -37,21 +40,21 @@ loop() {
   set_status_color $BLUE
   echo "Running pipeline"
   echo "Pulling newest version.."
+
   git pull origin main
   if [ "$?" != "0" ]
   then
     set_status_color $RED
     return
   fi
+
+  echo "Reset teensy"
+  echo "0" > /sys/class/gpio/gpio$TEENSY_RESET/value
+  sleep 0.1
+  echo "1" > /sys/class/gpio/gpio$TEENSY_RESET/value
+
   echo "Compiling.."
-  arduino-cli compile --fqbn arduino:avr:uno blink
-  if [ "$?" != "0" ]
-  then
-    set_status_color $RED
-    return
-  fi
-  echo "Uploading.."
-  arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno blink
+  arduino-cli compile --fqbn teensy:avr:teensy40
   if [ "$?" != "0" ]
   then
     set_status_color $RED

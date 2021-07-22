@@ -1,5 +1,5 @@
 #!/bin/bash
-HOME=/root
+export HOME=/root
 cd /root/project/blink
 
 RED=18

@@ -66,7 +66,7 @@ loop() {
   while [ "$SERIAL" == "" ]
   do
     sleep 0.5
-    SERIAL=`ls /dev/ttyACM*`
+    SERIAL=`ls /dev/ttyACM* 2> /dev/null`
   done
   echo "Found serial on $SERIAL"
   nc 192.168.1.77 1337 < $SERIAL &

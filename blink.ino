@@ -44,18 +44,7 @@ void setup() {
         Fastwire::setup(400, true);
     #endif
 
-    // initialize serial communication
-    // (38400 chosen because it works as well at 8MHz as it does at 16MHz, but
-    // it's really up to you depending on your project)
-    Serial.begin(38400);
-
-    // initialize device
-    Serial.println("Initializing I2C devices...");
     accelgyro.initialize();
-
-    // verify connection
-    Serial.println("Testing device connections...");
-    Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");
 
     // use the code below to change accel/gyro offset values
     accelgyro.setXGyroOffset(-43);
@@ -64,6 +53,8 @@ void setup() {
 
     // configure Arduino LED pin for output
     pinMode(LED_PIN, OUTPUT);
+
+    delay(8000)
 }
 
 void loop() {

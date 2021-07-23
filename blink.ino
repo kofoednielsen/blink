@@ -53,8 +53,6 @@ void setup() {
 
     // configure Arduino LED pin for output
     pinMode(LED_PIN, OUTPUT);
-
-    delay(8000);
 }
 
 void loop() {
@@ -69,12 +67,13 @@ void loop() {
       // Serial.print(ax); Serial.print("\t");
       // Serial.print(ay); Serial.print("\t");
       // Serial.print(az); Serial.print("\t");
-      // Serial.print(double(gx)/131.7); Serial.print("\t");
-      // Serial.print(double(gy)/131.7); Serial.print("\t");
-      // Serial.println(double(gz)/131.7);
+      Serial.print(gx); Serial.print("\t");
+      Serial.print(gy); Serial.print("\t");
+      Serial.println(gz);
       Serial.write((uint8_t)(gx >> 8)); Serial.write((uint8_t)(gx & 0xFF));
       Serial.write((uint8_t)(gy >> 8)); Serial.write((uint8_t)(gy & 0xFF));
       Serial.write((uint8_t)(gz >> 8)); Serial.write((uint8_t)(gz & 0xFF));
+      Serial.println();
 
     // blink LED to indicate activity
     blinkState = !blinkState;

@@ -74,21 +74,16 @@ void loop() {
     //accelgyro.getAcceleration(&ax, &ay, &az);
     //accelgyro.getRotation(&gx, &gy, &gz);
 
-    #ifdef OUTPUT_READABLE_ACCELGYRO
-        // display tab-separated accel/gyro x/y/z values
-        // Serial.print(ax); Serial.print("\t");
-        // Serial.print(ay); Serial.print("\t");
-        // Serial.print(az); Serial.print("\t");
-        // Serial.print(double(gx)/131.7); Serial.print("\t");
-        // Serial.print(double(gy)/131.7); Serial.print("\t");
-        // Serial.println(double(gz)/131.7);
-    #endif
-
-    #ifdef OUTPUT_BINARY_ACCELGYRO
-        Serial.write((uint8_t)(gx >> 8)); Serial.write((uint8_t)(gx & 0xFF));
-        Serial.write((uint8_t)(gy >> 8)); Serial.write((uint8_t)(gy & 0xFF));
-        Serial.write((uint8_t)(gz >> 8)); Serial.write((uint8_t)(gz & 0xFF));
-    #endif
+      // display tab-separated accel/gyro x/y/z values
+      // Serial.print(ax); Serial.print("\t");
+      // Serial.print(ay); Serial.print("\t");
+      // Serial.print(az); Serial.print("\t");
+      // Serial.print(double(gx)/131.7); Serial.print("\t");
+      // Serial.print(double(gy)/131.7); Serial.print("\t");
+      // Serial.println(double(gz)/131.7);
+      Serial.write((uint8_t)(gx >> 8)); Serial.write((uint8_t)(gx & 0xFF));
+      Serial.write((uint8_t)(gy >> 8)); Serial.write((uint8_t)(gy & 0xFF));
+      Serial.write((uint8_t)(gz >> 8)); Serial.write((uint8_t)(gz & 0xFF));
 
     // blink LED to indicate activity
     blinkState = !blinkState;

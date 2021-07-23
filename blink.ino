@@ -112,9 +112,9 @@ void loop() {
         // Serial.print(ax); Serial.print("\t");
         // Serial.print(ay); Serial.print("\t");
         // Serial.print(az); Serial.print("\t");
-        Serial.print(gx/32767); Serial.print("\t");
-        Serial.print(gy/32767); Serial.print("\t");
-        Serial.println(gz/32767);
+        Serial.print(double(gx)/131.7); Serial.print("\t");
+        Serial.print(double(gy)/131.7); Serial.print("\t");
+        Serial.println(double(gz)/131.7);
     #endif
 
     #ifdef OUTPUT_BINARY_ACCELGYRO

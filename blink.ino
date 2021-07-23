@@ -54,7 +54,7 @@ void setup() {
     // configure Arduino LED pin for output
     pinMode(LED_PIN, OUTPUT);
 
-    delay(8000)
+    delay(8000);
 }
 
 void loop() {

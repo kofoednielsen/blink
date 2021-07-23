@@ -70,11 +70,9 @@ void loop() {
       // Serial.print(gx); Serial.print("\t");
       // Serial.print(gy); Serial.print("\t");
       // Serial.println(gz);
-      Serial.write(0xAA);
       Serial.write(gx);//(uint8_t)(gx >> 8)); Serial.write((uint8_t)(gx & 0xFF));
       Serial.write(gy);//(uint8_t)(gy >> 8)); Serial.write((uint8_t)(gy & 0xFF));
       Serial.write(gz);//(uint8_t)(gz >> 8)); Serial.write((uint8_t)(gz & 0xFF));
-      Serial.write(0xAA);
 
     // blink LED to indicate activity
     blinkState = !blinkState;

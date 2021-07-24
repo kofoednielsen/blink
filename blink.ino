@@ -55,7 +55,7 @@ void setup() {
     pinMode(LED_PIN, OUTPUT);
 }
 
-unsigned long time = 0;
+unsigned long last_time = 0;
 unsigned int16_t delta_t = 0;
 void loop() {
     // read raw accel/gyro measurements from device

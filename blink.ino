@@ -55,6 +55,8 @@ void setup() {
     pinMode(LED_PIN, OUTPUT);
 }
 
+unsigned long time = 0;
+unsigned int16_t delta_t = 0;
 void loop() {
     // read raw accel/gyro measurements from device
     accelgyro.getRotation(&gx, &gy, &gz);
@@ -63,18 +65,23 @@ void loop() {
     //accelgyro.getAcceleration(&ax, &ay, &az);
     //accelgyro.getRotation(&gx, &gy, &gz);
 
-      // display tab-separated accel/gyro x/y/z values
-      // Serial.print(ax); Serial.print("\t");
-      // Serial.print(ay); Serial.print("\t");
-      // Serial.print(az); Serial.print("\t");
-      // Serial.print(gx); Serial.print("\t");
-      // Serial.print(gy); Serial.print("\t");
-      // Serial.println(gz);
-      Serial.write((uint8_t)(gx & 0xFF)); Serial.write((uint8_t)(gx >> 8));
-      Serial.write((uint8_t)(gy & 0xFF)); Serial.write((uint8_t)(gy >> 8)); 
-      Serial.write((uint8_t)(gz & 0xFF)); Serial.write((uint8_t)(gz >> 8));
+    // display tab-separated accel/gyro x/y/z values
+    // Serial.print(ax); Serial.print("\t");
+    // Serial.print(ay); Serial.print("\t");
+    // Serial.print(az); Serial.print("\t");
+    // Serial.print(gx); Serial.print("\t");
+    // Serial.print(gy); Serial.print("\t");
+    // Serial.println(gz);
+
+    delta_t = micros()-last_time
+    Serial.write((uint8_t)(gx & 0xFF)); Serial.write((uint8_t)(gx >> 8));
+    Serial.write((uint8_t)(gy & 0xFF)); Serial.write((uint8_t)(gy >> 8)); 
+    Serial.write((uint8_t)(gz & 0xFF)); Serial.write((uint8_t)(gz >> 8));
+    Serial.write((uint8_t)(delta_t & 0xFF)); Serial.write((uint8_t)(delta_t >> 8));
 
     // blink LED to indicate activity
-    blinkState = !blinkState;
     digitalWrite(LED_PIN, blinkState);
+    blinkState = !blinkState;
+
+    last_time = micros();
 }

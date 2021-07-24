@@ -56,7 +56,8 @@ void setup() {
 }
 
 unsigned long last_time = 0;
-unsigned int16_t delta_t = 0;
+int16_t delta_t = 0;
+
 void loop() {
     // read raw accel/gyro measurements from device
     accelgyro.getRotation(&gx, &gy, &gz);
@@ -73,7 +74,7 @@ void loop() {
     // Serial.print(gy); Serial.print("\t");
     // Serial.println(gz);
 
-    delta_t = micros()-last_time
+    delta_t = micros()-last_time;
     Serial.write((uint8_t)(gx & 0xFF)); Serial.write((uint8_t)(gx >> 8));
     Serial.write((uint8_t)(gy & 0xFF)); Serial.write((uint8_t)(gy >> 8)); 
     Serial.write((uint8_t)(gz & 0xFF)); Serial.write((uint8_t)(gz >> 8));

@@ -69,7 +69,7 @@ loop() {
     SERIAL=`ls /dev/ttyACM* 2> /dev/null`
   done
   echo "Found serial on $SERIAL"
-  nc 192.168.0.187 1337 < $SERIAL &
+  nc 192.168.1.77 1337 < $SERIAL &
 }
 
 loop

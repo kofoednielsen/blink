@@ -11,7 +11,7 @@ int16_t gx, gy, gz;
 // servo motor_1;
 // servo motor_2;
 // servo motor_3;
-// servo rudder; 
+// servo motor_4; 
 
 void setup() {
   Wire.begin();
@@ -26,14 +26,14 @@ void setup() {
   // Setup receiver channels with default min, mid & max (1000, 1500, 1900)
   RcChannel rc[] = {1, 2, 3, 4};
 
-  // aileron.attach(5);
-  // aileron.writeMicroseconds(1500);
-  // elevator.attach(6);
-  // elevator.writeMicroseconds(1500);
-  // throttle.attach(7);
-  // throttle.writeMicroseconds(1500);
-  // rudder.attach(8);
-  // rudder.writeMicroseconds(1500);
+  // motor_1.attach(5);
+  // motor_1.writeMicroseconds(1500);
+  // motor_2.attach(6);
+  // motor_2.writeMicroseconds(1500);
+  // motor_3.attach(7);
+  // motor_3.writeMicroseconds(1500);
+  // motor_4.attach(8);
+  // motor_4.writeMicroseconds(1500);
 
 }
 

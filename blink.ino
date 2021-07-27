@@ -8,8 +8,8 @@ MPU6050 accelgyro;
 
 int16_t gx, gy, gz;
 
-servo motor_1;
-servo motor_2;
+Servo motor_1;
+Servo motor_2;
 // servo motor_3;
 // servo motor_4;
 
@@ -52,15 +52,11 @@ void loop() {
     accelgyro.getRotation(&gx, &gy, &gz);
 
     delta_t = micros()-last_time;
-    Serial.write((uint8_t)(gx & 0xFF)); Serial.write((uint8_t)(gx >> 8));
-    Serial.write((uint8_t)(gy & 0xFF)); Serial.write((uint8_t)(gy >> 8));
-    Serial.write((uint8_t)(gz & 0xFF)); Serial.write((uint8_t)(gz >> 8));
-    Serial.write((uint8_t)(delta_t & 0xFF)); Serial.write((uint8_t)(delta_t >> 8));
-
-    aileron_pwm = aileron.getValue();
-    elevator_pwm = elevator.getValue();
-    throttle_pwm = throttle.getValue();
-    rudder_pwm = rudder.getValue();
+    
+    byte aileron_pwm = aileron.getValue();
+    byte elevator_pwm = elevator.getValue();
+    byte throttle_pwm = throttle.getValue();
+    byte rudder_pwm = rudder.getValue();
 
     Serial.print(aileron_pwm);
     Serial.print("\t");

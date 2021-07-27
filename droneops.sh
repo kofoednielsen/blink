@@ -70,6 +70,7 @@ loop() {
   done
   echo "Found serial on $SERIAL"
   nc 192.168.1.77 1337 < $SERIAL &
+  nc 192.168.1.50 1337 < $SERIAL &
 }
 
 loop

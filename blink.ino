@@ -2,14 +2,14 @@
 #include "MPU6050.h"
 #include "Wire.h"
 #include <RcChannel.h>
-// #include <Servo.h>
+#include <Servo.h>
 
 MPU6050 accelgyro;
 
 int16_t gx, gy, gz;
 
-// servo motor_1;
-// servo motor_2;
+servo motor_1;
+servo motor_2;
 // servo motor_3;
 // servo motor_4; 
 
@@ -26,10 +26,10 @@ void setup() {
   // Setup receiver channels with default min, mid & max (1000, 1500, 1900)
   RcChannel rc[] = {1, 2, 3, 4};
 
-  // motor_1.attach(5);
-  // motor_1.writeMicroseconds(1500);
-  // motor_2.attach(6);
-  // motor_2.writeMicroseconds(1500);
+  motor_1.attach(5);
+  motor_1.writeMicroseconds(1500);
+  motor_2.attach(6);
+  motor_2.writeMicroseconds(1500);
   // motor_3.attach(7);
   // motor_3.writeMicroseconds(1500);
   // motor_4.attach(8);
@@ -49,10 +49,10 @@ void loop() {
     Serial.write((uint8_t)(gz & 0xFF)); Serial.write((uint8_t)(gz >> 8));
     Serial.write((uint8_t)(delta_t & 0xFF)); Serial.write((uint8_t)(delta_t >> 8));
 
-    aileron_percentage = rc[1].readPercentage();
-    elevator_percentage = rc[2].readPercentage();
-    throttle_percentage = rc[3].readPercentage();
-    rudder_percentage = rc[4].readPercentage();
+    aileron_pwm = rc[1].readRaw();
+    elevator_pwm = rc[2].readRaw();
+    throttle_pwm = rc[3].readRaw();
+    rudder_pwm = rc[4].readRaw();
 
     Serial.print(aileron_percentage);
     Serial.print("\t");
@@ -61,6 +61,9 @@ void loop() {
     Serial.print(throttle_percentage);
     Serial.print("\t");
     Serial.print(rudder_percentage);
+
+    motor_1.writeMicroseconds(throttle_pwm);
+    motor_2.writeMicroseconds(throttle_pwm);
 
     last_time = micros();
 }

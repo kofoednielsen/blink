@@ -1,7 +1,7 @@
 #include "I2Cdev.h"
 #include "MPU6050.h"
 #include "Wire.h"
-// #include "RCReceive.h"
+#include "RCReceive.h"
 #include <Servo.h>
 
 MPU6050 accelgyro;
@@ -13,10 +13,10 @@ Servo motor_2;
 // servo motor_3;
 // servo motor_4;
 
-// RCReceive aileron;
-// RCReceive elevator;
-// RCReceive throttle;
-// RCReceive rudder;
+RCReceive aileron;
+RCReceive elevator;
+RCReceive throttle;
+RCReceive rudder;
 
 void setup() {
   Wire.begin();
@@ -29,10 +29,10 @@ void setup() {
   accelgyro.setZGyroOffset(-28);
 
   // Setup receiver channels with default min, mid & max (1000, 1500, 1900)
-  // aileron.attachInt(1);
-  // elevator.attachInt(2);
-  // throttle.attachInt(3);
-  // rudder.attachInt(4);
+  aileron.attachInt(1);
+  elevator.attachInt(2);
+  throttle.attachInt(3);
+  rudder.attachInt(4);
 
   motor_1.attach(5);
   motor_1.writeMicroseconds(1000);
@@ -53,22 +53,22 @@ void loop() {
 
     delta_t = micros()-last_time;
     
-    // byte aileron_pwm = aileron.getValue();
-    // byte elevator_pwm = elevator.getValue();
-    // byte throttle_pwm = throttle.getValue();
-    // byte rudder_pwm = rudder.getValue();
+    uint8_t aileron_pwm = aileron.getValue();
+    uint8_t elevator_pwm = elevator.getValue();
+    uint8_t throttle_pwm = throttle.getValue();
+    uint8_t rudder_pwm = rudder.getValue();
 
-    // Serial.print(aileron_pwm);
-    // Serial.print("\t");
-    // Serial.print(elevator_pwm);
-    // Serial.print("\t");
-    // Serial.print(throttle_pwm);
-    // Serial.print("\t");
-    // Serial.print(rudder_pwm);
+    Serial.print(aileron_pwm);
+    Serial.print("\t");
+    Serial.print(elevator_pwm);
+    Serial.print("\t");
+    Serial.print(throttle_pwm);
+    Serial.print("\t");
+    Serial.print(rudder_pwm);
     Serial.println("Code is actually running.");
 
-    motor_1.writeMicroseconds(1000);
-    motor_2.writeMicroseconds(1000);
+    motor_1.writeMicroseconds(throttle_pwm);
+    motor_2.writeMicroseconds(throttle_pwm);
 
     last_time = micros();
 }

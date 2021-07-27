@@ -35,9 +35,9 @@ void setup() {
   rudder.attachInt(4);
 
   motor_1.attach(5);
-  motor_1.writeMicroseconds(1500);
+  motor_1.writeMicroseconds(1000);
   motor_2.attach(6);
-  motor_2.writeMicroseconds(1500);
+  motor_2.writeMicroseconds(1000);
   // motor_3.attach(7);
   // motor_3.writeMicroseconds(1500);
   // motor_4.attach(8);

@@ -59,7 +59,7 @@ void loop() {
   y = gy/131.7;
 
   uint8_t output = myPID.step(0, y);
-  Serial.print(output)
+  Serial.println(output);
   if (throttle.getValue() > 1000) {
     motor_1.writeMicroseconds(throttle.getValue() - output);
     motor_2.writeMicroseconds(throttle.getValue() + output);

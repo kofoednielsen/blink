@@ -54,12 +54,13 @@ int16_t x = 0;
 int16_t y = 0;
 int16_t z = 0;
 
+long last = = micros()  
 void loop() {
   accelgyro.getRotation(&gx, &gy, &gz);
   y = gy/131.7;
 
   int16_t output = myPID.step(0, y);
-  Serial.println(output);
+  //Serial.println(output);
   if (throttle.getValue() > 1000) {
     motor_1.writeMicroseconds(throttle.getValue() - output);
     motor_2.writeMicroseconds(throttle.getValue() + output);
@@ -68,5 +69,6 @@ void loop() {
     motor_1.writeMicroseconds(1000);
     motor_2.writeMicroseconds(1000);
    }
+  Serial.println(micros()-last);
   delay(1);
 }

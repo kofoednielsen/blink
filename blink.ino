@@ -63,7 +63,7 @@ void loop() {
   if (throttle.getValue() > 1000) {
     motor_1.writeMicroseconds(throttle.getValue() + output);
     motor_2.writeMicroseconds(throttle.getValue() - output);
-  } else
+  } else {
     motor_1.writeMicroseconds(1000);
     motor_2.writeMicroseconds(1000);
   }

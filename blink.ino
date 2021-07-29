@@ -18,7 +18,7 @@ PWM elevator(2);
 PWM throttle(3);
 PWM rudder(4);
 
-FastPID myPID(10, 0, 0, 100, 8, true);
+FastPID myPID(10, 0, 0, 1000, 8, true);
 
 void setup() {
   Wire.begin();
@@ -63,8 +63,9 @@ void loop() {
     motor_1.writeMicroseconds(throttle.getValue() - output);
     motor_2.writeMicroseconds(throttle.getValue() + output);
   } else {
+    myPID.clear();
     motor_1.writeMicroseconds(1000);
     motor_2.writeMicroseconds(1000);
   }
-  delay(10);
+  delay(1);
 }

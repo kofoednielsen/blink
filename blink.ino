@@ -48,18 +48,13 @@ void setup() {
   // motor_4.writeMicroseconds(1500);
 }
 
-unsigned long last_time = 0;
-int16_t delta_t = 0;
-int16_t x = 0;
-int16_t y = 0;
-int16_t z = 0;
+long last = 0;
 
 void loop() {
-  long last = micros();
+  last = micros();
   accelgyro.getRotation(&gx, &gy, &gz);
-  y = gy/131.7;
 
-  int16_t output = myPID.step(0, y);
+  int16_t output = myPID.step(0, gt);
   //Serial.println(output);
   if (throttle.getValue() > 1000) {
     motor_1.writeMicroseconds(throttle.getValue() - output);

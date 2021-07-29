@@ -46,7 +46,6 @@ void setup() {
   // motor_3.writeMicroseconds(1500);
   // motor_4.attach(8);
   // motor_4.writeMicroseconds(1500);
-  delay(10)
 }
 
 unsigned long last_time = 0;

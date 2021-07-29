@@ -54,8 +54,8 @@ int16_t x = 0;
 int16_t y = 0;
 int16_t z = 0;
 
-long last = micros();
 void loop() {
+  long last = micros();
   accelgyro.getRotation(&gx, &gy, &gz);
   y = gy/131.7;
 

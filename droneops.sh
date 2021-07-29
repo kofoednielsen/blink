@@ -69,13 +69,19 @@ loop() {
     SERIAL=`ls /dev/ttyACM* 2> /dev/null`
   done
   echo "Found serial on $SERIAL"
-  nc 192.168.1.77 1337 < $SERIAL &
-  nc 192.168.1.50 1337 < $SERIAL &
+
+  nc 192.168.1.227 1337 < $SERIAL &
 }
 
-sleep 10
-loop
+# Turn on green and blue while waiting for internet connection
+echo "1" > /sys/class/gpio/gpio$GREEN/value
+echo "1" > /sys/class/gpio/gpio$BLUE/value
+while ! ping -c 1 1.1.1.1 2>&1 > /dev/null
+do
+  sleep 0.5
+done
 
+loop
 while true then 
   do
   echo "HTTP/1.1 200 OK

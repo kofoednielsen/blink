@@ -3,7 +3,6 @@
 #include "Wire.h"
 #include <Servo.h>
 #include "PWM.hpp"
-
 MPU6050 accelgyro;
 
 int16_t gx, gy, gz;
@@ -29,10 +28,10 @@ void setup() {
   accelgyro.setZGyroOffset(-28);
 
   // Setup receiver channels
-  aileron.begin(true)
-  elevator.begin(true)
-  throttle.begin(true)
-  rudder.begin(true)
+  aileron.begin(true);
+  elevator.begin(true);
+  throttle.begin(true);
+  rudder.begin(true);
 
   motor_1.attach(5);
   motor_1.writeMicroseconds(1000);

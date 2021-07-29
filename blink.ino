@@ -64,5 +64,5 @@ void loop() {
     motor_2.writeMicroseconds(1000);
    }
   Serial.println(micros()-last);
-  delay(1);
+  delayMicroseconds(150);
 }

@@ -57,13 +57,13 @@ void loop() {
     // uint8_t throttle_pwm = throttle.getValue();
     // uint8_t rudder_pwm = rudder.getValue();
 
-    Serial.print(aileron_pwm);
-    Serial.print("\t");
-    Serial.print(elevator_pwm);
-    Serial.print("\t");
-    Serial.print(throttle_pwm);
-    Serial.print("\t");
-    Serial.print(rudder_pwm);
+    // Serial.print(aileron_pwm);
+    // Serial.print("\t");
+    // Serial.print(elevator_pwm);
+    // Serial.print("\t");
+    // Serial.print(throttle_pwm);
+    // Serial.print("\t");
+    // Serial.print(rudder_pwm);
     Serial.println("Code is actually running.");
 
     motor_1.writeMicroseconds(throttle_pwm);

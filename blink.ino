@@ -57,7 +57,7 @@ int16_t z = 0;
 
 void loop() {
   accelgyro.getRotation(&gx, &gy, &gz);
-  y = gy/131.7
+  y = gy/131.7;
 
   uint8_t output = myPID.step(0, y);
   if (throttle.getValue() > 1000) {
@@ -67,5 +67,5 @@ void loop() {
     motor_1.writeMicroseconds(1000);
     motor_2.writeMicroseconds(1000);
   }
-  delay(10)    
+  delay(10);
 }

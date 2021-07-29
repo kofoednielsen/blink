@@ -18,7 +18,7 @@ PWM elevator(2);
 PWM throttle(3);
 PWM rudder(4);
 
-FastPID myPID(3, 2, 2, 1000, 16, true);
+FastPID myPID(1, 0.5, 0.5, 1000, 16, true);
 
 void setup() {
   Wire.begin();

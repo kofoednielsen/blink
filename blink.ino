@@ -3,6 +3,7 @@
 #include "Wire.h"
 #include <Servo.h>
 #include "PWM.hpp"
+#include <FastPID.h>
 MPU6050 accelgyro;
 
 int16_t gx, gy, gz;
@@ -17,8 +18,12 @@ PWM elevator(2);
 PWM throttle(3);
 PWM rudder(4);
 
+FastPID myPID(10, 0, 0, 100, 8, true);
+
 void setup() {
   Wire.begin();
+
+  myPID.setOutputRange(-200, 200)
 
   accelgyro.initialize();
 
@@ -41,27 +46,26 @@ void setup() {
   // motor_3.writeMicroseconds(1500);
   // motor_4.attach(8);
   // motor_4.writeMicroseconds(1500);
-
+  delay(10)
 }
 
 unsigned long last_time = 0;
 int16_t delta_t = 0;
+int16_t x = 0;
+int16_t y = 0;
+int16_t z = 0;
 
 void loop() {
-    accelgyro.getRotation(&gx, &gy, &gz);
+  accelgyro.getRotation(&gx, &gy, &gz);
+  y = gy/131.7
 
-    delta_t = micros()-last_time;
-    
-    Serial.print(aileron.getValue());
-    Serial.print("\t");
-    Serial.print(elevator.getValue());
-    Serial.print("\t");
-    Serial.print(throttle.getValue());
-    Serial.print("\t");
-    Serial.print(rudder.getValue());
-
-    motor_1.writeMicroseconds(throttle.getValue());
-    motor_2.writeMicroseconds(throttle.getValue());
-
-    last_time = micros();
+  uint8_t output = myPID.step(0, y);
+  if (throttle.getValue() > 1000) {
+    motor_1.writeMicroseconds(throttle.getValue() + output);
+    motor_2.writeMicroseconds(throttle.getValue() - output);
+  } else
+    motor_1.writeMicroseconds(1000);
+    motor_2.writeMicroseconds(1000);
+  }
+  delay(10)    
 }

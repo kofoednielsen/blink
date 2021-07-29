@@ -58,7 +58,7 @@ void loop() {
   accelgyro.getRotation(&gx, &gy, &gz);
   y = gy/131.7;
 
-  uint8_t output = myPID.step(0, y);
+  int16_t output = myPID.step(0, y);
   Serial.println(output);
   if (throttle.getValue() > 1000) {
     motor_1.writeMicroseconds(throttle.getValue() + output);
@@ -67,6 +67,6 @@ void loop() {
     myPID.clear();
     motor_1.writeMicroseconds(1000);
     motor_2.writeMicroseconds(1000);
-  }
+   }
   delay(1);
 }

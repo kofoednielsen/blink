@@ -61,8 +61,8 @@ void loop() {
   int16_t output = myPID.step(0, y);
   Serial.println(output);
   if (throttle.getValue() > 1000) {
-    motor_1.writeMicroseconds(throttle.getValue() + output);
-    motor_2.writeMicroseconds(throttle.getValue() - output);
+    motor_1.writeMicroseconds(throttle.getValue() - output);
+    motor_2.writeMicroseconds(throttle.getValue() + output);
   } else {
     myPID.clear();
     motor_1.writeMicroseconds(1000);

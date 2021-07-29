@@ -66,8 +66,8 @@ void loop() {
     // Serial.print(rudder_pwm);
     Serial.println("Code is actually running.");
 
-    motor_1.writeMicroseconds(throttle_pwm);
-    motor_2.writeMicroseconds(throttle_pwm);
+    // motor_1.writeMicroseconds(throttle_pwm);
+    // motor_2.writeMicroseconds(throttle_pwm);
 
     last_time = micros();
 }

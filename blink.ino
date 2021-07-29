@@ -23,7 +23,7 @@ FastPID myPID(10, 0, 0, 100, 8, true);
 void setup() {
   Wire.begin();
 
-  myPID.setOutputRange(-200, 200)
+  myPID.setOutputRange(-200, 200);
 
   accelgyro.initialize();
 

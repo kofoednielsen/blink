@@ -73,6 +73,7 @@ loop() {
   nc 192.168.1.50 1337 < $SERIAL &
 }
 
+sleep 10
 loop
 
 while true then 

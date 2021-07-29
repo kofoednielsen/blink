@@ -54,7 +54,7 @@ void loop() {
   last = micros();
   accelgyro.getRotation(&gx, &gy, &gz);
 
-  int16_t output = myPID.step(0, gt);
+  int16_t output = myPID.step(0, gy);
   //Serial.println(output);
   if (throttle.getValue() > 1000) {
     motor_1.writeMicroseconds(throttle.getValue() - output);

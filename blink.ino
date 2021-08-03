@@ -54,7 +54,7 @@ void loop() {
   last = micros();
   accelgyro.getRotation(&gx, &gy, &gz);
 
-  int16_t calc_throttle = (elevator.getValue() - 500) / 2;
+  int16_t calc_throttle = (elevator.getValue() - 500);
   //Serial.println(output);
   if (calc_throttle > 1000) {
     int16_t output = myPID.step(0, gy);

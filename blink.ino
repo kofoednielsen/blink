@@ -68,7 +68,7 @@ int loop_counter = 0; void loop() {
     motor_2.writeMicroseconds(1000);
    }
   if (loop_counter++ % 200 == 0) {
-    float tmp = ((float)throttle.getValue()-1000)/1000000;
+    float tmp = ((float)throttle.getValue()-1000)/100000;
     if (tmp < 0) tmp = 0;
     myPID.configure(tmp, 0, dk, 1000, 16, true);
     Serial.print(tmp, 8);

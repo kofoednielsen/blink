@@ -18,7 +18,7 @@ PWM elevator(2);
 PWM throttle(3);
 PWM rudder(4);
 
-float pk = 0.0067
+float pk = 0.0067;
 
 FastPID myPID(pk, 0, 0, 1000, 16, true);
 

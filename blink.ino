@@ -54,7 +54,7 @@ void loop() {
   last = micros();
   accelgyro.getRotation(&gx, &gy, &gz);
 
-  int16_t calc_throttle = (aileron.getValue - 500);
+  int16_t calc_throttle = aileron.getValue() - 500;
   //Serial.println(output);
   if (calc_throttle > 1000) {
     int16_t output = myPID.step(0, gy);

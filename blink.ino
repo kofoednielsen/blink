@@ -60,7 +60,7 @@ int loop_counter = 0; void loop() {
   int16_t calc_throttle = (elevator.getValue() - 500);
   //Serial.println(output);
   if (calc_throttle > 1000) {
-    int16_t output = myPID.step(0, gy);
+    int16_t output = myPID.step(aileron.getValue() - 1500, gy);
     motor_1.writeMicroseconds(calc_throttle - output);
     motor_2.writeMicroseconds(calc_throttle + output);
   } else {

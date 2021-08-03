@@ -67,7 +67,7 @@ int loop_counter = 0; void loop() {
   if (loop_counter++ %  1000) {
     float new_pk = ((float)throttle.getValue()-1000)/10;
     myPID.configure(new_pk, 0, 0, 1000, 16, true);
-    Serial.print(new_pk)
+    Serial.print(new_pk);
     Serial.print("\t");
     Serial.println(micros()-last);
   }

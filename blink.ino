@@ -50,7 +50,7 @@ void setup() {
 
 long last = 0;
 
-void loop() {
+int loop_counter = 0; void loop() {
   last = micros();
   accelgyro.getRotation(&gx, &gy, &gz);
 
@@ -64,8 +64,12 @@ void loop() {
     motor_1.writeMicroseconds(1000);
     motor_2.writeMicroseconds(1000);
    }
-  Serial.print(((float)throttle.getValue()-1000)/10);
-  Serial.print("\t");
-  Serial.println(micros()-last);
+  if (loop_counter++ %  1000) {
+    float new_pk = ((float)throttle.getValue()-1000)/10;
+    myPID.configure(new_pk, 0, 0, 1000, 16, true);
+    Serial.print(new_pk)
+    Serial.print("\t");
+    Serial.println(micros()-last);
+  }
   delayMicroseconds(150);
 }

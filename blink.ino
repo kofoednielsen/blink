@@ -54,7 +54,7 @@ void loop() {
   last = micros();
   accelgyro.getRotation(&gx, &gy, &gz);
 
-  int16_t calc_throttle = aileron.getValue() - 500;
+  int16_t calc_throttle = (elevator.getValue() - 500) / 2;
   //Serial.println(output);
   if (calc_throttle > 1000) {
     int16_t output = myPID.step(0, gy);
@@ -64,7 +64,7 @@ void loop() {
     motor_1.writeMicroseconds(1000);
     motor_2.writeMicroseconds(1000);
    }
-  Serial.print(throttle.getValue()/100);
+  Serial.print(((float)throttle.getValue()-1000)/10);
   Serial.print("\t");
   Serial.println(micros()-last);
   delayMicroseconds(150);

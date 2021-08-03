@@ -19,7 +19,7 @@ PWM throttle(3);
 PWM rudder(4);
 
 float pk = 0.0067;
-float dk = 0.0000057
+float dk = 0.0000057;
 
 FastPID myPID(pk, 0, dk, 1000, 16, true);
 

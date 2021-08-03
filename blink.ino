@@ -18,7 +18,7 @@ PWM elevator(2);
 PWM throttle(3);
 PWM rudder(4);
 
-FastPID myPID(3, 3, 3, 1000, 16, true);
+FastPID myPID(3, 0, 0, 1000, 16, true);
 
 void setup() {
   Wire.begin();
@@ -54,15 +54,18 @@ void loop() {
   last = micros();
   accelgyro.getRotation(&gx, &gy, &gz);
 
+  int16_t calc_throttle = (aileron.getValue - 500)
   //Serial.println(output);
-  if (throttle.getValue() > 1000) {
+  if (calc_throttle > 1000) {
     int16_t output = myPID.step(0, gy);
-    motor_1.writeMicroseconds(throttle.getValue() - output);
-    motor_2.writeMicroseconds(throttle.getValue() + output);
+    motor_1.writeMicroseconds(calc_throttle - output);
+    motor_2.writeMicroseconds(calc_throttle + output);
   } else {
     motor_1.writeMicroseconds(1000);
     motor_2.writeMicroseconds(1000);
    }
+  Serial.print(throttle.getValue()/100);
+  Serial.print("\t");
   Serial.println(micros()-last);
   delayMicroseconds(150);
 }

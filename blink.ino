@@ -70,7 +70,7 @@ int loop_counter = 0; void loop() {
     float tmp = ((float)throttle.getValue()-1000)/10000000;
     if (tmp < 0) tmp = 0;
     myPID.configure(pk, 0, tmp, 1000, 16, true);
-    Serial.print(tmp, 4);
+    Serial.print(tmp, 12);
     Serial.print("\t");
     Serial.println(micros()-last);
   }

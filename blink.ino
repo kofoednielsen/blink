@@ -19,8 +19,9 @@ PWM throttle(3);
 PWM rudder(4);
 
 float pk = 0.0067;
+float dk = 0.0000057
 
-FastPID myPID(pk, 0, 0, 1000, 16, true);
+FastPID myPID(pk, 0, dk, 1000, 16, true);
 
 void setup() {
   Wire.begin();
@@ -67,10 +68,10 @@ int loop_counter = 0; void loop() {
     motor_2.writeMicroseconds(1000);
    }
   if (loop_counter++ % 200 == 0) {
-    float tmp = ((float)throttle.getValue()-1000)/10000000;
+    float tmp = ((float)throttle.getValue()-1000)/1000000;
     if (tmp < 0) tmp = 0;
-    myPID.configure(pk, 0, tmp, 1000, 16, true);
-    Serial.print(tmp, 12);
+    myPID.configure(tmp, 0, dk, 1000, 16, true);
+    Serial.print(tmp, 8);
     Serial.print("\t");
     Serial.println(micros()-last);
   }

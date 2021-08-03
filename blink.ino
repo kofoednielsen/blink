@@ -64,7 +64,7 @@ int loop_counter = 0; void loop() {
     motor_1.writeMicroseconds(1000);
     motor_2.writeMicroseconds(1000);
    }
-  if (loop_counter++ %  1000) {
+  if (loop_counter++ % 1000 == 0) {
     float new_pk = ((float)throttle.getValue()-1000)/10;
     myPID.configure(new_pk, 0, 0, 1000, 16, true);
     Serial.print(new_pk);

@@ -10,8 +10,8 @@ int16_t gx, gy, gz;
 
 Servo motor_1;
 Servo motor_2;
-servo motor_3;
-servo motor_4;
+Servo motor_3;
+Servo motor_4;
 
 PWM aileron(1);
 PWM elevator(2);

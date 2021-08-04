@@ -69,7 +69,7 @@ int loop_counter = 0; void loop() {
     motor_3.writeMicroseconds(1000);
     motor_4.writeMicroseconds(1000);
    }
-  if (loop_counter++ % 200 == 0) {
+  if (loop_counter++ % 10 == 0) {
     Serial.print((int)aileron.getValue() - 1500);
     Serial.print("\t");
     Serial.print((int)elevator.getValue() - 1500);

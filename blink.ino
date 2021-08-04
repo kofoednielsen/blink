@@ -76,12 +76,14 @@ void loop() {
   gx = gx - gx_calib;
   gy = gy - gy_calib;
 
+  int adj_rudder = (rudder.getValue() - 1500) / 2;
+
   int16_t x_output = xPID.step((elevator.getValue()-1500)*30, gx);
   int16_t y_output = yPID.step((aileron.getValue()-1500)*30, gy);
-  motor_1.writeMicroseconds(throttle.getValue() + y_output + x_output);
-  motor_2.writeMicroseconds(throttle.getValue() - y_output + x_output);
-  motor_3.writeMicroseconds(throttle.getValue() + y_output - x_output);
-  motor_4.writeMicroseconds(throttle.getValue() - y_output - x_output);
+  motor_1.writeMicroseconds(throttle.getValue() + y_output + x_output + adj_rudder);
+  motor_2.writeMicroseconds(throttle.getValue() - y_output + x_output - adj_rudder);
+  motor_3.writeMicroseconds(throttle.getValue() + y_output - x_output + adj_rudder);
+  motor_4.writeMicroseconds(throttle.getValue() - y_output - x_output - adj_rudder);
 
   if (loop_counter++ % 30 == 0) {
     char debugstr[200];

@@ -56,19 +56,19 @@ int loop_counter = 0; void loop() {
   accelgyro.getRotation(&gx, &gy, &gz);
 
   //Serial.println(output);
-  if (throttle.getValue() > 1000) {
+  //if (throttle.getValue() > 1000) {
     int16_t x_output = xPID.step((aileron.getValue()-1500)*30, gx);
     int16_t y_output = yPID.step((elevator.getValue()-1500)*30, gy);
     motor_1.writeMicroseconds(throttle.getValue() + y_output + x_output);
     motor_2.writeMicroseconds(throttle.getValue() - y_output + x_output);
     motor_3.writeMicroseconds(throttle.getValue() + y_output - x_output);
     motor_4.writeMicroseconds(throttle.getValue() - y_output - x_output);
-  } else {
-    motor_1.writeMicroseconds(1000);
-    motor_2.writeMicroseconds(1000);
-    motor_3.writeMicroseconds(1000);
-    motor_4.writeMicroseconds(1000);
-   }
+  // } else {
+  //   motor_1.writeMicroseconds(1000);
+  //   motor_2.writeMicroseconds(1000);
+  //   motor_3.writeMicroseconds(1000);
+  //   motor_4.writeMicroseconds(1000);
+  //  }
   if (loop_counter++ % 10 == 0) {
     Serial.print((int)aileron.getValue() - 1500);
     Serial.print("\t");

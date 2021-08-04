@@ -61,14 +61,19 @@ int loop_counter = 0; void loop() {
   motor_4.writeMicroseconds(throttle.getValue() - y_output - x_output);
 
   if (loop_counter++ % 30 == 0) {
+    Serial.print("gx ");
+    Serial.print(gx);
+    Serial.print("\tgy ");
+    Serial.print(gy);
+    Serial.print("\tm1: ");
     Serial.print(motor_1.readMicroseconds());
-    Serial.print("\t");
+    Serial.print("\tm2: ");
     Serial.print(motor_2.readMicroseconds());
-    Serial.print("\t");
+    Serial.print("\tm3: ");
     Serial.print(motor_3.readMicroseconds());
-    Serial.print("\t");
+    Serial.print("\tm4: ");
     Serial.print(motor_4.readMicroseconds());
-    Serial.print("\t");
+    Serial.print("\tt:");
     Serial.println(micros()-last);
   }
   delayMicroseconds(150);

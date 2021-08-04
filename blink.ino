@@ -70,9 +70,9 @@ int loop_counter = 0; void loop() {
     motor_4.writeMicroseconds(1000);
    }
   if (loop_counter++ % 200 == 0) {
-    Serial.print(aileron.getValue() - 1500);
+    Serial.print((int)aileron.getValue() - 1500);
     Serial.print("\t");
-    Serial.print(elevator.getValue() - 1500);
+    Serial.print((int)elevator.getValue() - 1500);
     Serial.print("\t");
     Serial.println(micros()-last);
   }

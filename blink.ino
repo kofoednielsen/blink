@@ -22,7 +22,10 @@ float pk = 0.0050;
 float dk = 0.0000057;
 
 FastPID xPID(pk, 0, dk, 1000, 16, true);
-FastPID yPID(pk, 0, dk, 1000, 16, true); void setup() {
+FastPID yPID(pk, 0, dk, 1000, 16, true);
+
+
+void setup() {
   Wire.begin();
 
   xPID.setOutputRange(-200, 200);
@@ -49,7 +52,9 @@ FastPID yPID(pk, 0, dk, 1000, 16, true); void setup() {
 
 long last = 0;
 
-int loop_counter = 0; void loop() {
+int loop_counter = 0;
+
+void loop() {
   last = micros();
   accelgyro.getRotation(&gx, &gy, &gz);
 
@@ -62,7 +67,7 @@ int loop_counter = 0; void loop() {
 
   if (loop_counter++ % 30 == 0) {
     char debugstr[200];
-    sprintf("gx=%6d gy=%6d m1=%04d m2=%04d m3=%04d m4=%04d dt=%08d",
+    sprintf(debugstr,"gx=%6d gy=%6d m1=%04d m2=%04d m3=%04d m4=%04d dt=%08d",
       gx, gy, motor_1.readMicroseconds(), motor_2.readMicroseconds(), motor_3.readMicroseconds(), motor_4.readMicroseconds(),
       micros() - last);
     Serial.println(debugstr);

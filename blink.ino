@@ -61,20 +61,11 @@ int loop_counter = 0; void loop() {
   motor_4.writeMicroseconds(throttle.getValue() - y_output - x_output);
 
   if (loop_counter++ % 30 == 0) {
-    Serial.print("gx ");
-    Serial.print(gx);
-    Serial.print("\tgy ");
-    Serial.print(gy);
-    Serial.print("\tm1: ");
-    Serial.print(motor_1.readMicroseconds());
-    Serial.print("\tm2: ");
-    Serial.print(motor_2.readMicroseconds());
-    Serial.print("\tm3: ");
-    Serial.print(motor_3.readMicroseconds());
-    Serial.print("\tm4: ");
-    Serial.print(motor_4.readMicroseconds());
-    Serial.print("\tt:");
-    Serial.println(micros()-last);
+    char debugstr[200];
+    sprintf("gx=%6d gy=%6d m1=%04d m2=%04d m3=%04d m4=%04d dt=%08d",
+      gx, gy, motor_1.readMicroseconds(), motor_2.readMicroseconds(), motor_3.readMicroseconds(), motor_4.readMicroseconds(),
+      micros() - last);
+    Serial.println(debugstr);
   }
   delayMicroseconds(150);
 }

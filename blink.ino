@@ -27,7 +27,8 @@ FastPID yPID(pk, 0, dk, 1000, 16, true);
 void setup() {
   Wire.begin();
 
-  myPID.setOutputRange(-200, 200);
+  xPID.setOutputRange(-200, 200);
+  yPID.setOutputRange(-200, 200);
 
   accelgyro.initialize();
 
@@ -56,8 +57,8 @@ int loop_counter = 0; void loop() {
 
   //Serial.println(output);
   if (throttle.getValue() > 1000) {
-    int16_t x_output = myPID.step(aileron.getValue() - 1500, gx);
-    int16_t y_output = myPID.step(elevator.getValue() - 1500, gy);
+    int16_t x_output = xPID.step(aileron.getValue() - 1500, gx);
+    int16_t y_output = yPID.step(elevator.getValue() - 1500, gy);
     motor_1.writeMicroseconds(throttle.getValue() + y_output + x_output);
     motor_2.writeMicroseconds(throttle.getValue() - y_output + x_output);
     motor_3.writeMicroseconds(throttle.getValue() + y_output - x_output);

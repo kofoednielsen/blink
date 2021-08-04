@@ -22,9 +22,7 @@ float pk = 0.0050;
 float dk = 0.0000057;
 
 FastPID xPID(pk, 0, dk, 1000, 16, true);
-FastPID yPID(pk, 0, dk, 1000, 16, true);
-
-void setup() {
+FastPID yPID(pk, 0, dk, 1000, 16, true); void setup() {
   Wire.begin();
 
   xPID.setOutputRange(-200, 200);
@@ -55,22 +53,21 @@ int loop_counter = 0; void loop() {
   last = micros();
   accelgyro.getRotation(&gx, &gy, &gz);
 
-  // int16_t x_output = xPID.step((elevator.getValue()-1500)*30, gx);
-  // int16_t y_output = yPID.step((aileron.getValue()-1500)*30, gy);
-  // motor_1.writeMicroseconds(throttle.getValue() + y_output + x_output);
-  // motor_2.writeMicroseconds(throttle.getValue() - y_output + x_output);
-  // motor_3.writeMicroseconds(throttle.getValue() + y_output - x_output);
-  // motor_4.writeMicroseconds(throttle.getValue() - y_output - x_output);
+  int16_t x_output = xPID.step((elevator.getValue()-1500)*30, gx);
+  int16_t y_output = yPID.step((aileron.getValue()-1500)*30, gy);
+  motor_1.writeMicroseconds(throttle.getValue() + y_output + x_output);
+  motor_2.writeMicroseconds(throttle.getValue() - y_output + x_output);
+  motor_3.writeMicroseconds(throttle.getValue() + y_output - x_output);
+  motor_4.writeMicroseconds(throttle.getValue() - y_output - x_output);
 
-  motor_1.writeMicroseconds(throttle.getValue());
-  motor_2.writeMicroseconds(throttle.getValue());
-  motor_3.writeMicroseconds(throttle.getValue());
-  motor_4.writeMicroseconds(throttle.getValue());
-
-  if (loop_counter++ % 10 == 0) {
-    Serial.print((int)aileron.getValue() - 1500);
+  if (loop_counter++ % 30 == 0) {
+    Serial.print(motor_1.readMicroseconds());
     Serial.print("\t");
-    Serial.print((int)elevator.getValue() - 1500);
+    Serial.print(motor_2.readMicroseconds());
+    Serial.print("\t");
+    Serial.print(motor_3.readMicroseconds());
+    Serial.print("\t");
+    Serial.print(motor_4.readMicroseconds());
     Serial.print("\t");
     Serial.println(micros()-last);
   }

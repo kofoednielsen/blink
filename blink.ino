@@ -54,9 +54,27 @@ long last = 0;
 
 int loop_counter = 0;
 
+int calibration_samples = 0;
+int64_t gx_calib_sum = 0;
+int64_t gy_calib_sum = 0;
+int gx_calib = 0;
+int gy_calib = 0;
+
 void loop() {
   last = micros();
   accelgyro.getRotation(&gx, &gy, &gz);
+
+  if (calibration_samples < 1000) {
+    gx_calib_sum += gx;
+    gy_calib_sum += gy;
+  } else if (calibration_samples == 1000) {
+    gx_calib = gx_calib_sum / calibration_samples;
+    gy_calib = gy_calib_sum / calibration_samples;
+  }
+
+  calibration_samples += 1;
+  gx = gx - gx_calib;
+  gy = gy - gy_calib;
 
   int16_t x_output = xPID.step((elevator.getValue()-1500)*30, gx);
   int16_t y_output = yPID.step((aileron.getValue()-1500)*30, gy);
@@ -67,7 +85,7 @@ void loop() {
 
   if (loop_counter++ % 30 == 0) {
     char debugstr[200];
-    sprintf(debugstr,"gx=%6d gy=%6d m1=%04d m2=%04d m3=%04d m4=%04d dt=%08d",
+    sprintf(debugstr,"gx=%6d  gy=%6d     m1=%04d m2=%04d m3=%04d m4=%04d    dt=%08d",
       gx, gy, motor_1.readMicroseconds(), motor_2.readMicroseconds(), motor_3.readMicroseconds(), motor_4.readMicroseconds(),
       micros() - last);
     Serial.println(debugstr);
